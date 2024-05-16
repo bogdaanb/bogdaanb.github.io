@@ -1,0 +1,204 @@
+/* Define la fuente Lato para la barra de navegación */
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/Lato-Regular.ttf") format("truetype");
+}
+
+/* Define la fuente Flaviotte para uso específico */
+@font-face {
+  font-family: "Lato-Bold";
+  src: url("../fonts/Lato/Lato-Bold.ttf") format("truetype");
+}
+
+.navbar {
+  font-family: "Lato", sans-serif; /* Fuente principal con fallback */
+}
+
+/* Estilos para los iconos SVG dentro de los enlaces de la navbar */
+.nav-link svg {
+  fill: #959595; /* Color inicial de los iconos */
+  transition: fill 0.3s; /* Transición suave del color al hacer hover */
+}
+.nav-link:hover svg {
+  fill: #ffffff; /* Cambia el color de los iconos a blanco al hacer hover */
+}
+
+.nav-link {
+  position: relative; /* Necesario para posicionar el pseudoelemento */
+  display: inline-block; /* Asegura que el link maneje bien el padding y los pseudoelementos */
+  color: #959595; /* Color normal */
+  transition: color 0.3s, transform 0.3s;
+  text-decoration: none; /* Remueve el subrayado predeterminado */
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column; /* Organiza los hijos en columna */
+    align-items: flex-end; /* Alinea los hijos al final del contenedor */
+}
+
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: #ffffff; /* Color de la barra subrayada */
+  transform: scaleX(0); /* Comienza sin ser visible */
+  transition: transform 0.3s; /* Animación de la barra subrayada */
+  transform-origin: right;
+}
+
+.nav-link:hover {
+  color: #ffffff; /* Color al hacer hover */
+  transform: translateY(1px); /* Mueve ligeramente hacia abajo */
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1); /* Expande la barra subrayada */
+  transform-origin: left; /* Anima desde la izquierda */
+}
+
+.nav-item.custom-margin {
+  margin-right: 70px; /* Margen derecho personalizado para los elementos de la navbar */
+}
+.nav-item {
+  color: #959595;
+}
+
+body {
+  background-color: #131313;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Altura total de la ventana del navegador */
+  display: flex;
+  flex-direction: column; /* Orientación vertical */
+}
+
+.navbar {
+  width: 100%; /* Asegura que el navbar abarque todo el ancho */
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-family: "Lato-Bold", sans-serif;
+  font-size: 36px;
+  color: #959595;
+}
+
+.subheading {
+  font-size: 24px;
+  color: #959595;
+}
+
+footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: #959595;
+}
+
+.background-svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.inflate {
+  display: inline-block; /* Permite la transformación */
+  margin: 0px; /* Espacio entre palabras */
+  transition: transform 0.3s ease, color 0.3s ease; /* Transiciones suaves para transform y color */
+  color: #959595; /* Color inicial */
+  cursor: pointer; /* Indica interactividad */
+}
+
+.inflate:hover {
+  transform: scale(1.1); /* Aumenta el tamaño en un 10% */
+  color: #ffffff; /* Cambia el color a blanco */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Espacia los elementos a lo largo */
+  align-items: center; /* Alinea los elementos verticalmente */
+  padding: 10px 20px; /* Añade padding para mejor visualización */
+}
+
+.footer-text {
+  margin: 0; /* Remueve márgenes adicionales si existen */
+}
+
+.clock {
+  font-size: 18px; /* Ajusta según sea necesario */
+  color: #ffffff; /* Cambia el color si es necesario */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.background-svg {
+  animation: spin 20s linear infinite;
+}
+
+
+.form-check-input:checked {
+    background-color: #959595; 
+    border-color: #959595; 
+}
+
+/* Estilo para el botón del switch */
+.form-check-input:checked::before {
+    background-color: #ffffff; /* Blanco */
+}
+
+/* Estilo para el fondo del switch cuando está desactivado */
+.form-check-input {
+    background-color: #ccc; /* Gris claro */
+    border-color: #ccc; /* Gris claro */
+}
+
+/* Estilo para el botón del switch en estado desactivado */
+.form-check-input::before {
+    background-color: #ffffff; /* Blanco */
+}
+
+.form-check-input {
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-check-input::before {
+    transition: background-color 0.3s;
+}
+
+.form-check-input:focus {
+    outline: none;
+    box-shadow: none; /* Elimina el box-shadow que podría estar causando el efecto azul */
+}
+.form-check-input:active {
+    background-color: #ccc; /* O el color que prefieras */
+    box-shadow: none;
+}
+
+.form-check-input:active,
+.form-check-input:checked:active::before {
+    background-color: #ddd !important;
+}
