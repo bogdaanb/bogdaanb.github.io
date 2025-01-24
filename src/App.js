@@ -9,12 +9,7 @@ import Projects from "./components/Projects";
 import MidnightProject from "./pages/MidnightProject";
 import "./App.css";
 
-const MainLayout = ({
-  isLightMode,
-  setIsLightMode,
-  hoverState,
-  setHoverState,
-}) => {
+const MainLayout = ({ isLightMode, setIsLightMode, hoverState, setHoverState }) => {
   return (
     <div
       className={`App transition-colors duration-300 ${
@@ -35,22 +30,25 @@ const App = () => {
   const [hoverState, setHoverState] = useState(false); // 🔹 Declare hoverState here
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.8,
-      easing: (t) => t,
-      smooth: true,
-    });
+    // Solo activar Lenis en pantallas grandes (mayores a 768px)
+    if (window.innerWidth > 768) {
+      const lenis = new Lenis({
+        duration: 0.8,
+        easing: (t) => t,
+        smooth: true,
+      });
 
-    function raf(time) {
-      lenis.raf(time);
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
+
+      return () => {
+        lenis.destroy();
+      };
     }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
   }, []);
 
   useEffect(() => {
@@ -64,7 +62,6 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* ✅ Pass hoverState to MainLayout */}
         <Route
           path="/"
           element={
