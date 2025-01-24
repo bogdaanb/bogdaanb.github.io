@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Curvy";
+    src: url("./fonts/Curvy.ttf") format("truetype");
+  }
+  
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  
