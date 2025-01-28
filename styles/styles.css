@@ -75,6 +75,9 @@ body {
   height: 100vh; /* Altura total de la ventana del navegador */
   display: flex;
   flex-direction: column; /* Orientación vertical */
+  overflow: auto !important;
+  overscroll-behavior: contain;
+  height: auto !important;
 }
 
 .navbar {
