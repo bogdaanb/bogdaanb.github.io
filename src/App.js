@@ -9,7 +9,12 @@ import Projects from "./components/Projects";
 import MidnightProject from "./pages/MidnightProject";
 import "./App.css";
 
-const MainLayout = ({ isLightMode, setIsLightMode, hoverState, setHoverState }) => {
+const MainLayout = ({
+  isLightMode,
+  setIsLightMode,
+  hoverState,
+  setHoverState,
+}) => {
   return (
     <div
       className={`App transition-colors duration-300 ${
@@ -34,8 +39,11 @@ const App = () => {
     if (window.innerWidth > 768) {
       const lenis = new Lenis({
         duration: 0.8,
+        lerp: 0.1,
         easing: (t) => t,
         smooth: true,
+        gestureOrientation: "both", 
+        touchMultiplier: 2,
       });
 
       function raf(time) {

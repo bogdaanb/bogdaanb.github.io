@@ -3,42 +3,48 @@ import { gsap } from 'gsap';
 
 const Pointer = ({ isLightMode, isHovering }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (event) => {
       const { clientX, clientY } = event;
       setPosition({ x: clientX, y: clientY });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const pointerElement = document.querySelector('.pointer');
     if (pointerElement) {
       gsap.to(pointerElement, {
-        duration: 0.3, // Reducir la duración para que siga más rápido
+        duration: 0.3,
         x: position.x,
         y: position.y,
         ease: 'power3.out',
       });
     }
-  }, [position]);
+  }, [position, isMobile]);
 
-  useEffect(() => {
-    const pointerElement = document.querySelector('.pointer');
-    if (pointerElement) {
-      gsap.to(pointerElement, {
-        duration: 0.3,
-        scale: isHovering ? 0.5 : 1, // Cambiar la escala para empequeñecer aún más
-        ease: 'power2.out',
-      });
-    }
-  }, [isHovering]);
+  if (isMobile) return null; // 🚀 No renderiza el puntero en móviles
 
   const crossColor = isLightMode ? '#303030' : '#f2f0ef'; 
 
